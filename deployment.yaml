@@ -1,4 +1,4 @@
-apiersioapiVersion: apps/v1
+apiversioapiVersion: apps/v1
 kind: Deployment
 metadata:
   name: springboot-app
