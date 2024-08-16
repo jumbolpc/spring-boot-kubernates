@@ -27,11 +27,13 @@ pipeline {
         }
 
         stage('Build Docker Image') {
-            bat "docker build -t ${DOCKER_IMAGE} ."
+            steps {
+                bat "docker build -t ${DOCKER_IMAGE} ."
 
-            bat "docker image prune -f"
+                bat "docker image prune -f"
 
-            bat "docker images"
+                bat "docker images"
+            }
         }
     }
 
