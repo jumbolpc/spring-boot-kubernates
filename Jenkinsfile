@@ -4,6 +4,8 @@ pipeline {
     environment {
         MAVEN_ARGS = " -e clean install"
         DOCKER_IMAGE = "jumbolpc/springboot-app-jenkins:latest"
+        KUBE_CONFIG_PATH = 'C:\\Users\\jumbo\\.kube\\config' // linux, mac /User/jumbo/.kube/config
+        KUBE_NAMESPACE = 'default'
     }
 
     stages {
@@ -41,6 +43,12 @@ pipeline {
                     bat "docker login -u jumbolpc -p %DOCKERHUB_PASSWORD%"
                     bat "docker push ${DOCKER_IMAGE}"
                 }
+            }
+        }
+        stage('Deploy to Kubernates') {
+            steps {
+                bat "kubectl --kubeconfig=${KUBE_CONFIG_PATH} apply -f deployment.yaml -n ${KUBE_NAMESPACE}"
+                bat "kubectl --kubeconfig=${KUBE_CONFIG_PATH} rollout status deployment/springboot-app -n ${KUBE_NAMESPACE}"
             }
         }
     }
