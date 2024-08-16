@@ -20,11 +20,11 @@ pipeline {
             }
         }
 
-        stage('Run Spring boot') {
-            steps {
-                bat "java -jar target/demo-0.0.1-SNAPSHOT.jar"
-            }
-        }
+        // stage('Run Spring boot') {
+        //     steps {
+        //         bat "java -jar target/demo-0.0.1-SNAPSHOT.jar"
+        //     }
+        // }
 
         stage('Build Docker Image') {
             steps {
