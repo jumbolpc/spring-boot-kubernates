@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         MAVEN_ARGS = " -e clean install"
+        DOCKER_IMAGE = "jumbolpc/springboot-app-jenkins:latest"
     }
 
     stages {
@@ -23,6 +24,14 @@ pipeline {
             steps {
                 bat "java -jar target/demo-0.0.1-SNAPSHOT.jar"
             }
+        }
+
+        stage('Build Docker Image') {
+            bat "docker build -t ${DOCKER_IMAGE} ."
+
+            bat "docker image prune -f"
+
+            bat "docker images"
         }
     }
 
