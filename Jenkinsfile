@@ -35,6 +35,14 @@ pipeline {
                 bat "docker images"
             }
         }
+        stage('Push Docker Image') {
+            steps {
+                withCredentials([string(credentialsId: 'dockerhub-credentials', variable: 'DOCKERHUB_PASSWORD')]) {
+                    bat "docker login -u jumbolpc -p %DOCKERHUB_PASSWORD%"
+                    bat "docker push ${DOCKER_IMAGE}"
+                }
+            }
+        }
     }
 
     post {
