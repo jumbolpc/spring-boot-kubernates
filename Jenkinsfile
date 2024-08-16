@@ -7,11 +7,11 @@ pipeline {
     }
 
     stages {
-        stage('Clone Repository'){
-            steps {
-                bat 'git clone https://github.com/jumbolpc/spring-boot-kubernates.git'
-            }
-        }
+        // stage('Clone Repository'){
+        //     steps {
+        //         bat 'git clone https://github.com/jumbolpc/spring-boot-kubernates.git'
+        //     }
+        // }
         stage('Build Maven Project') {
             steps {
                 withMaven(maven: 'MAVEN_HOME'){
